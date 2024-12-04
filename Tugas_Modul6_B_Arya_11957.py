@@ -1,10 +1,10 @@
-import streamlit as st # type: ignore
+import streamlit as st
 import tensorflow as tf
 import numpy as np
-from tensorflow.keras.models import load_model # type: ignore
+from tensorflow.keras.models import load_model
 from PIL import Image
 
-model = r'gugelnet.h5'
+model = load_model(r'gugelnet.h5')
 class_names = ["Matang", "Mentah"]
 
 def classify_image(image_path):
@@ -57,10 +57,10 @@ if st.sidebar.button("Prediksi"):
                 secondary_color = "#FF4136"
                 label_color = primary_color if label == "Matang" else secondary_color
 
-                st.sidebar.write(f"**Nama File:** {uploaded_file.name}")
+                st.sidebar.write(f"*Nama File:* {uploaded_file.name}")
                 st.sidebar.markdown(f"<h4 style='color: {label_color};'>Prediksi: {label}</h4>", unsafe_allow_html = True)
 
-                st.sidebar.write("**Confidence:**")
+                st.sidebar.write("*Confidence:*")
 
                 for i, class_name in enumerate(class_names):
                     st.sidebar.write(f"- {class_name}: {confidence[i] * 100:.2f}%")
